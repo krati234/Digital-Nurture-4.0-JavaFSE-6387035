@@ -1,0 +1,99 @@
+Big O Notation (with Reference to E-commerce Product Search Code)
+
+Big O notation is a mathematical concept used in computer science to describe the performance or complexity of an algorithm. It provides an upper bound on the time or space complexity of an algorithm in terms of input size n.
+
+In the E-commerce Platform Search Function Java program, we use Big O notation to understand the efficiency of:
+
+- linearSearch() – searching without sorting
+- binarySearch() – searching on a sorted array
+
+This analysis helps in choosing the right algorithm for fast product lookup based on product name.
+
+---
+
+ Big O Notation Overview (with Code Examples)
+
+| Big O            | Description                             | Example in Code                                                    |
+| ---------------- | --------------------------------------- | ------------------------------------------------------------------ |
+| O(1)             | Constant time – doesn't grow with input | Not used directly, but seen in array access products[mid]          |
+| O(log n)         | Logarithmic time – grows slowly         | binarySearch(products, "Phone") – divides search space in half     |
+| O(n)             | Linear time – grows with input          | linearSearch(products, "Phone") – checks each product one by one   |
+| O(n log n)       | Efficient sorting                       | Arrays.sort(products, Comparator...) used before binary search     |
+| O(n²)            | Quadratic – not used in this context    | ❌                                                                  |
+| O(2ⁿ), O(n!)     | Exponential – not used here             | ❌                                                                  |
+
+---
+
+How Big O Notation Helps in Our Search Code
+
+1. Performance Comparison:
+
+   - linearSearch() checks each element → O(n)
+   - binarySearch() narrows the search using divide-and-conquer → O(log n)
+   - Knowing this helps choose the right method depending on dataset size.
+
+2. Scalability:
+
+   - If your e-commerce platform has 100,000+ products, using linearSearch() would be slow (up to 100,000 checks).
+   - binarySearch() on sorted data will take about log₂(100,000) ≈ 17 steps.
+
+---
+
+Search Operations Analysis in the Code
+
+1. Linear Search (linearSearch() method)
+
+public static int linearSearch(Product[] products, String targetName) {
+    for (int i = 0; i < products.length; i++) {
+        if (products[i].productName.equalsIgnoreCase(targetName)) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+- Best-case: O(1) → The searched product is the first item
+- Average-case: O(n) → On average, it checks half the items
+- Worst-case: O(n) → Last item or not present
+
+Simple but not efficient for large product catalogs.
+
+---
+
+2. Binary Search (binarySearch() method)
+
+public static int binarySearch(Product[] products, String targetName) {
+    int left = 0, right = products.length - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        int cmp = products[mid].productName.compareToIgnoreCase(targetName);
+        if (cmp == 0) return mid;
+        else if (cmp < 0) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+
+> Used after sorting:
+
+Arrays.sort(products, Comparator.comparing(p -> p.productName.toLowerCase()));
+
+- Best-case: O(1) → If the target is exactly in the middle
+- Average-case: O(log n) → Repeatedly divides the array
+- Worst-case: O(log n) → Fully narrowed down search
+
+Efficient for large datasets, but requires pre-sorting the array.
+
+---
+
+Final Verdict
+
+| Factor                | Linear Search             | Binary Search                |
+| --------------------- | ------------------------- | ---------------------------- |
+| Sorting Required      | No                        | Yes (used Arrays.sort)       |
+| Performance (large n) | Slower – O(n)             | Faster – O(log n)            |
+| Use Case              | Small data, simple search | Large data, optimized search |
+| Used in Code          | linearSearch()            | binarySearch()               |
+
+In the code provided, binarySearch() is more suitable for the e-commerce platform because it offers much better performance when product names are sorted — which is a practical assumption in real-world systems.
+
