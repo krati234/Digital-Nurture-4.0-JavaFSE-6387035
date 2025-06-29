@@ -1,0 +1,134 @@
+
+---
+
+Exercise 1 Setting Up JUnit Solution
+
+---
+Objective:
+Set up JUnit in a Java project using Maven and write a test class to validate the setup.
+
+---
+ Scenario 1 Basic JUnit Setup in Eclipse Using Maven
+
+Steps:
+
+1. Open Eclipse IDE.
+2. Create a new Maven project:
+   `File > New > Maven Project > Create a simple project > Group ID: com.example, Artifact ID: junitdemo`
+3. Open the `pom.xml` file and add the JUnit dependency:
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.2</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+```
+
+4. Create a Java class named `Calculator.java`:
+
+```java
+package com.example;
+
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+```
+
+5. Create a test class `CalculatorTest.java` under `src/test/java/com/example`:
+
+```java
+package com.example;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class CalculatorTest {
+    @Test
+    public void testAdd() {
+        Calculator calc = new Calculator();
+        assertEquals(5, calc.add(2, 3));
+    }
+}
+```
+
+6. Run the test.
+   Expected Output: Test passed
+
+---
+
+Scenario 2 Test Setup with Multiple Methods
+
+Goal: Test multiple methods of the `Calculator` class.
+
+1. Update `Calculator.java`:
+
+```java
+package com.example;
+
+public class Calculator {
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public int subtract(int a, int b) {
+        return a - b;
+    }
+}
+```
+
+2. Update `CalculatorTest.java`:
+
+```java
+package com.example;
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class CalculatorTest {
+
+    @Test
+    public void testAdd() {
+        Calculator c = new Calculator();
+        assertEquals(7, c.add(3, 4));
+    }
+
+    @Test
+    public void testSubtract() {
+        Calculator c = new Calculator();
+        assertEquals(2, c.subtract(5, 3));
+    }
+}
+```
+
+3. Run the tests.
+   Expected Output: All tests pass
+
+---
+ Scenario 3 Handling Edge Cases (Zero and Negative Numbers)
+
+Goal: Test edge cases like zero and negative values.
+
+Add more test cases to `CalculatorTest.java`:
+
+```java
+@Test
+public void testAddZero() {
+    Calculator c = new Calculator();
+    assertEquals(3, c.add(3, 0));
+}
+
+@Test
+public void testSubtractNegative() {
+    Calculator c = new Calculator();
+    assertEquals(-8, c.subtract(-5, 3));
+}
+```
+Expected Output: All tests pass
+
+---

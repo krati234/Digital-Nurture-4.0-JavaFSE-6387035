@@ -1,0 +1,54 @@
+Exercise 3 Assertions in JUnit Solution
+
+Objective:
+Use various JUnit assertions to validate test results.
+
+Scenario Validating Logic with Different JUnit Assertions
+You need to write a test class that demonstrates the use of different types of assertions provided by JUnit.
+
+Steps:
+
+Make sure your project is set up with JUnit refer to Exercise 1 if not.
+
+Create a new test class named AssertionsTest.java under src/test/java.
+
+Use the following code:
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+public class AssertionsTest {
+
+    @Test
+    public void testAssertions() {
+        // Assert that the sum is equal to expected value
+        assertEquals(5, 2 + 3);  // Passes because 2 + 3 == 5
+
+        // Assert that a condition is true
+        assertTrue(5 > 3);       // Passes because 5 is greater than 3
+
+        // Assert that a condition is false
+        assertFalse(5 < 3);      // Passes because 5 is not less than 3
+
+        // Assert that an object is null
+        assertNull(null);        // Passes because the value is indeed null
+
+        // Assert that an object is not null
+        assertNotNull(new Object());  // Passes because a new object is not null
+    }
+}
+
+Explanation of Assertions Used
+
+assertEquals(expected, actual) Verifies that two values are equal.
+
+assertTrue(condition) Verifies that a condition is true.
+
+assertFalse(condition) Verifies that a condition is false.
+
+assertNull(object) Verifies that an object is null.
+
+assertNotNull(object) Verifies that an object is not null.
+
+Expected Output
+All assertions pass. Test result will be green.

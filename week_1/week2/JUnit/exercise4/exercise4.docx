@@ -1,0 +1,95 @@
+Exercise 4: Arrange-Act-Assert (AAA) Pattern, Test Fixtures, Setup and Teardown in JUnit – Solution
+
+Objective:
+Organize unit tests using the AAA pattern (Arrange-Act-Assert) and use JUnit's @Before and @After annotations to manage setup and teardown operations.
+
+Scenario: Testing a Calculator Class with AAA Pattern and Lifecycle Methods
+Steps:
+
+Ensure your project has JUnit set up (see Exercise 1).
+
+Create a simple Calculator.java class:
+
+java
+Copy code
+package com.example;
+
+public class Calculator {
+    public int add(int a, int b) { return a + b; }
+    public int subtract(int a, int b) { return a - b; }
+}
+Create the test class CalculatorTest.java with setup and teardown logic:
+
+java
+Copy code
+package com.example;
+
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+
+public class CalculatorTest {
+
+    private Calculator calculator;
+
+    // Setup method: runs before each test
+    @Before
+    public void setUp() {
+        calculator = new Calculator();
+        System.out.println("Setting up Calculator object...");
+    }
+
+    // Teardown method: runs after each test
+    @After
+    public void tearDown() {
+        calculator = null;
+        System.out.println("Cleaning up Calculator object...");
+    }
+
+    // Test using Arrange-Act-Assert (AAA) pattern
+    @Test
+    public void testAddition() {
+        // Arrange
+        int a = 10;
+        int b = 5;
+
+        // Act
+        int result = calculator.add(a, b);
+
+        // Assert
+        assertEquals(15, result);
+    }
+
+    @Test
+    public void testSubtraction() {
+        // Arrange
+        int a = 8;
+        int b = 3;
+
+        // Act
+        int result = calculator.subtract(a, b);
+
+        // Assert
+        assertEquals(5, result);
+    }
+}
+Explanation:
+
+Arrange: Prepare data and objects needed for the test.
+
+Act: Call the method under test.
+
+Assert: Verify the result with assertions.
+
+@Before: Used to initialize test objects before each test runs.
+
+@After: Used to clean up or reset any test state after each test completes.
+
+Expected Output:
+
+Two test cases will run.
+
+setUp() and tearDown() messages will be printed before and after each test.
+
+Both tests will pass if implemented correctly.
