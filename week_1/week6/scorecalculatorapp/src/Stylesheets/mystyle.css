@@ -1,0 +1,17 @@
+.scorecard {
+  padding: 10px;
+  margin: 10px;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+}
+.score-details {
+  padding: 10px;
+  margin: 10px;
+  border-color: grey;
+  border-width: 2px;
+  border-style: solid;
+}
+.score-heading {
+  color: darkblue;
+}
